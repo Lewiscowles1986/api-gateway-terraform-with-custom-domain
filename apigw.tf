@@ -1,28 +1,28 @@
-resource "aws_api_gateway_rest_api" "main" {
-  name = "main"
+resource "aws_apigatewayv2_api" "main" {
+  name          = "main"
+  protocol_type = "HTTP"
 }
 
-resource "aws_api_gateway_domain_name" "api" {
-  domain_name = local.api_gw_fqdn
-  regional_certificate_arn = aws_acm_certificate.api.arn
-  security_policy = "TLS_1_2"
+resource "aws_apigatewayv2_stage" "staging" {
+  name        = var.DEFAULT_API_GW_STAGE
+  api_id      = aws_apigatewayv2_api.main.id
+  auto_deploy = true
+}
 
-  endpoint_configuration {
-    types           = ["REGIONAL"]
+resource "aws_apigatewayv2_domain_name" "api" {
+  domain_name = local.api_gw_fqdn
+
+  domain_name_configuration {
+    certificate_arn = aws_acm_certificate.api.arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
   }
 
   depends_on = [aws_acm_certificate_validation.api]
 }
 
-resource "aws_api_gateway_stage" "staging" {
-  depends_on    = [aws_api_gateway_domain_name.api]
-  stage_name    = var.DEFAULT_API_GW_STAGE
-  rest_api_id   = aws_api_gateway_rest_api.main.id
-  deployment_id = aws_api_gateway_deployment.teststage.id
-}
-
-resource "aws_api_gateway_base_path_mapping" "example" {
-  api_id      = aws_api_gateway_rest_api.main.id
-  stage_name  = aws_api_gateway_stage.staging.stage_name
-  domain_name = aws_api_gateway_domain_name.api.domain_name
+resource "aws_apigatewayv2_api_mapping" "api" {
+  api_id      = aws_apigatewayv2_api.main.id
+  domain_name = aws_apigatewayv2_domain_name.api.id
+  stage       = aws_apigatewayv2_stage.staging.id
 }

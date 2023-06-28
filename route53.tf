@@ -21,13 +21,13 @@ resource "aws_route53_record" "api_validation" {
 }
 
 resource "aws_route53_record" "api" {
-  name                     = aws_api_gateway_domain_name.api.domain_name
+  name                     = aws_apigatewayv2_domain_name.api.domain_name
   type                     = "A"
   zone_id                  = data.aws_route53_zone.public.zone_id
 
   alias {
-    name                   = aws_api_gateway_domain_name.api.regional_domain_name
-    zone_id                = aws_api_gateway_domain_name.api.regional_zone_id
+    name                   = aws_apigatewayv2_domain_name.api.domain_name_configuration[0].target_domain_name
+    zone_id                = aws_apigatewayv2_domain_name.api.domain_name_configuration[0].hosted_zone_id
     evaluate_target_health = false
   }
 }
