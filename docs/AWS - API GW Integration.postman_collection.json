@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "e36c2d6b-f63a-4e72-8c9a-990f21574a48",
+		"name": "AWS - API GW Integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/httpbin_integration/test",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"httpbin_integration",
+						"test"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK techlete.uk",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/httpbin_integration/test",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"httpbin_integration",
+								"test"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 28 Jun 2023 04:31:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "626"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "server",
+							"value": "gunicorn/19.9.0"
+						},
+						{
+							"key": "apigw-requestid",
+							"value": "HNmiog-KoAMEPvw="
+						},
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "access-control-allow-credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {},\n    \"data\": \"\",\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"Accept\": \"*/*\",\n        \"Accept-Encoding\": \"gzip, deflate, br\",\n        \"Content-Length\": \"0\",\n        \"Forwarded\": \"by=3.235.32.214;for=86.24.84.45;host=apigw-test.techlete.uk;proto=https\",\n        \"Host\": \"httpbin.org\",\n        \"Postman-Token\": \"923e00da-9935-4284-b073-268a59ebf966\",\n        \"User-Agent\": \"PostmanRuntime/7.32.2\",\n        \"X-Amzn-Trace-Id\": \"Self=1-649bb7aa-0b88eae56f73fe2a182561ef;Root=1-649bb7aa-4445448d1c8a8b61642627b3\"\n    },\n    \"json\": null,\n    \"method\": \"GET\",\n    \"origin\": \"3.235.32.214\",\n    \"url\": \"https://httpbin.org/anything/test\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "<<YOUR_URL_HERE>>",
+			"type": "default"
+		}
+	]
+}
